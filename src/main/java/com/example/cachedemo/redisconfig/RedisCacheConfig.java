@@ -30,7 +30,7 @@ import java.util.Map;
  * @create: 2018-09-04 09:50
  **/
 @Configuration
-@ConfigurationProperties(prefix = "myredis")
+@ConfigurationProperties(prefix = "redis-cache-config")
 @Slf4j
 @Data
 public class RedisCacheConfig {

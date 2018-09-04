@@ -4,7 +4,7 @@ spring:
     port: 6379
 
 
-myredis:
+redis-cache-config:
   cache[0]:
     name: product
     time: 2000
