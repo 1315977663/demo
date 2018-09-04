@@ -1,0 +1,13 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+
+myredis:
+  cache[0]:
+    name: product
+    time: 2000
+  cache[1]:
+    name: smsCode
+    time: 4000
