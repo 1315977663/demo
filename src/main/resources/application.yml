@@ -4,10 +4,7 @@ spring:
     port: 6379
 
 
-redis-cache-config:
-  cache[0]:
-    name: product
-    time: 2000
-  cache[1]:
-    name: smsCode
-    time: 4000
+#cache-info:
+#  cache-info-map:
+#    product: 200
+#    smsCode: 4000
