@@ -1,4 +1,4 @@
-package com.example.cachedemo;
+package com.example.cachedemo.services;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

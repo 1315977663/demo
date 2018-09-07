@@ -1,5 +1,6 @@
 package com.example.cachedemo;
 
+import com.example.cachedemo.services.CacheServer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,11 @@ public class CachedemoApplicationTests {
     @Test
     public void contextLoads() {
         cacheServer.setSmsCode("123245");
+        try {
+            liu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Cacheable(value = "product", keyGenerator = "myGenerator")
@@ -37,25 +43,27 @@ public class CachedemoApplicationTests {
         }
     }
 
+    // io包下流的练习
     public static void liu() throws IOException {
         BufferedReader bufferedReader = null;
         BufferedWriter bufferedWriter = null;
         try {
-            bufferedReader = new BufferedReader(
-                    new InputStreamReader(
-                            System.in
+            bufferedReader = new BufferedReader( // 套上缓冲流 就可以一行一行的读了 readLine
+                    new InputStreamReader( // 将字节流装换成字符流
+                            new FileInputStream("src/test/java/com/example/cachedemo/aaa.txt")
                     )
             );
             bufferedWriter = new BufferedWriter(
                     new OutputStreamWriter(
-                            new FileOutputStream("D:/bbb.txt")
+                            new FileOutputStream("src/test/java/com/example/cachedemo/bbb.txt")
                     )
             );
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         String a = null;
-        while(!(a = bufferedReader.readLine()).equalsIgnoreCase("exit")) {
+        assert bufferedReader != null;
+        while((a = bufferedReader.readLine()) != null) {
            log.info("{}", a);
             assert bufferedWriter != null;
             bufferedWriter.write(a);

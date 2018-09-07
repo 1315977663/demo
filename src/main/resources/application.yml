@@ -2,6 +2,22 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+server:
+  port: 8000
+  tomcat:
+    uri-encoding: UTF-8
+
 
 
 #cache-info:
