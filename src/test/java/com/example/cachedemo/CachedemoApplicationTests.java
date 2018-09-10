@@ -21,7 +21,7 @@ public class CachedemoApplicationTests {
 
     @Test
     public void contextLoads() {
-        cacheServer.setSmsCode("123245");
+        cacheServer.putSmsCodeCache("123245");
         try {
             liu();
         } catch (IOException e) {
@@ -29,19 +29,39 @@ public class CachedemoApplicationTests {
         }
     }
 
-    @Cacheable(value = "product", keyGenerator = "myGenerator")
-    public String setCache(String value) {
-        return value;
-    }
 
-
-    public static void main (String arg[]) {
-        try {
-            liu();
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Test
+    public void phoneSmsCode() {
+        String code = cacheServer.getSmsCode("1315977663");
+        if (code.length() == 6) {
+            log.error("【慢点再发吧】");
+        } else {
+            code = cacheServer.putSmsCodeCache("1315977663");
+            log.info("【code】{}", code);
         }
     }
+
+    @Test
+    public void login () {
+        String code = cacheServer.getSmsCode("1315977663");
+        if (code == null) {
+            log.error("【请先获取验证码】");
+        }
+        if (code.equals("123456")) {
+            log.error("【登录成功】");
+        } else {
+            log.error("【验证码错误】");
+        }
+    }
+
+
+//    public static void main (String arg[]) {
+//        try {
+//            liu();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // io包下流的练习
     public static void liu() throws IOException {

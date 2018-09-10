@@ -4,6 +4,7 @@ import com.example.cachedemo.services.UpLoadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +23,8 @@ public class UpLoadFileController {
     @PostMapping("/upload")
     public String upLoad (@RequestParam("file") MultipartFile multipartFile) {
         String msg;
-        if ((msg = upLoadFileService.upLoadFile(multipartFile)) != null) {
-            return msg;
+        if (upLoadFileService.upLoadFile(multipartFile)) {
+            return "成功";
         } else {
             return "失败";
         }

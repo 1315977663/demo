@@ -57,6 +57,12 @@ public class RedisCacheConfig {
     }
 
     @Bean
+    public KeyGenerator smsKeyGenerator () {
+        return (Object o, Method method, Object... objects) ->
+             objects[0].toString();
+    }
+
+    @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         return new RedisCacheManager(
                 RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory),
@@ -84,8 +90,8 @@ public class RedisCacheConfig {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
         redisCacheConfiguration = redisCacheConfiguration.serializeValuesWith(
                 RedisSerializationContext
-                    .SerializationPair
-                    .fromSerializer(jackson2JsonRedisSerializer)
+                        .SerializationPair
+                        .fromSerializer(jackson2JsonRedisSerializer)
         ).entryTtl(Duration.ofSeconds(seconds));
 
         return redisCacheConfiguration;
